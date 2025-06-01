@@ -1056,7 +1056,7 @@ function drawUnitTypes(startX, startY, player) {
 
                 if (unit.experienceLevel === 1) {
                     // One star for level 1
-                    ctx.fillText('★', badgeX + badgeSize/2, badgeY + badgeSize/2 + 1);
+                    ctx.fillText('★', badgeX + badgeSize/2, badgeY + badgeSize/2);
                 } else if (unit.experienceLevel === 2) {
                     // Two stars for level 2
                     ctx.fillText('★★', badgeX + badgeSize/2, badgeY + badgeSize/2 + 1);
