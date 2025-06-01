@@ -1,0 +1,67 @@
+{
+  "name": "com.wardeck.game",
+  "displayName": "War Deck",
+  "version": "1.0.0",
+  "description": "A military-themed lane-based tower defense strategy game",
+  "main": "index.js",
+  "scripts": {
+    "build": "cordova build",
+    "build-android": "cordova build android",
+    "build-ios": "cordova build ios",
+    "run-android": "cordova run android",
+    "run-ios": "cordova run ios",
+    "prepare": "cordova prepare",
+    "prepare-android": "cordova platform add android --nosave || true",
+    "clean": "cordova clean",
+    "serve": "cordova serve",
+    "postinstall": "npm run prepare-android",
+    "bundle": "webpack",
+    "bundle-watch": "webpack --watch",
+    "prebuild": "npm run bundle",
+    "prebuild-ios": "npm run bundle",
+    "prebuild-android": "npm run bundle"
+  },
+  "keywords": [
+    "game",
+    "tower-defense",
+    "strategy",
+    "military",
+    "cordova"
+  ],
+  "author": "War Deck Team",
+  "license": "MIT",
+  "devDependencies": {
+    "cordova": "^12.0.0",
+    "cordova-android": "^12.0.0",
+    "cordova-ios": "^6.3.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-loader": "^9.1.3"
+  },
+  "dependencies": {
+    "cordova-plugin-device": "^2.1.0",
+    "cordova-plugin-file": "^8.0.0",
+    "cordova-plugin-fullscreen": "^1.3.0",
+    "cordova-plugin-media": "^6.1.0",
+    "cordova-plugin-screen-orientation": "^3.0.2",
+    "cordova-plugin-splashscreen": "^6.0.2",
+    "cordova-plugin-statusbar": "^3.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-fullscreen": {},
+      "cordova-plugin-media": {},
+      "cordova-plugin-file": {}
+    }
+  }
+}

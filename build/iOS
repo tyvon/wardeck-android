@@ -1,0 +1,33 @@
+Bundle the updated code
+  npm run bundle
+
+Build and run iOS
+  npm run build-ios
+  npm run run-ios
+
+Start the web server:
+  # Option 1: Using Python (serves from www directory)
+  cd ~/www/WarDeckCordova/www && python3 -m http.server 8080
+  # Access at: http://localhost:8080
+
+  # Option 2: Using Cordova serve (shows project info page)
+  cd ~/www/WarDeckCordova && npm run serve
+  # Access at: http://localhost:8000/www/
+
+  Stop the web server:
+
+  # If using Python server:
+  pkill -f "python3 -m http.server"
+
+  # If using Cordova serve:
+  pkill -f "cordova serve"
+
+  # Or just press Ctrl+C in the terminal where the server is running
+
+  Quick one-liner to start in background:
+
+  # Start in background (add & at the end)
+  cd ~/www/WarDeckCordova/www && python3 -m http.server 8080 &
+
+  # Stop it later
+  pkill -f "python3 -m http.server 8080"

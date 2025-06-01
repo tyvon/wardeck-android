@@ -1,0 +1,41 @@
+# Cordova generated files
+platforms/
+plugins/
+node_modules/
+
+# Build outputs
+*.apk
+*.ipa
+*.app
+*.aab
+
+www/dist
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local configuration
+.env
+local.properties
+
+# Temporary files
+temp/
+tmp/
+.tmp/
+
+.claude
+
+# Cordova hooks (if auto-generated)
+hooks/README.md

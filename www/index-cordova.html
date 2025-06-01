@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <title>War Deck</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #canvas-container {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        #canvas-container.loaded {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+<div id="canvas-container">
+    <canvas id="gameCanvas"></canvas>
+</div>
+
+<!-- Cordova script (must be first) -->
+<script src="cordova.js"></script>
+
+<!-- Bundled game script (no ES6 modules) -->
+<script src="dist/game.bundle.js"></script>
+
+<script>
+    // When game is fully loaded, make the canvas visible
+    window.addEventListener('game-fully-loaded', () => {
+        document.getElementById('canvas-container').classList.add('loaded');
+    });
+</script>
+</body>
+</html>
