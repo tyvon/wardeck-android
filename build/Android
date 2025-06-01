@@ -1,0 +1,67 @@
+1. Initial Setup (one-time)
+
+  # Install dependencies
+  npm install
+
+  # Add Android platform (already done)
+  cordova platform add android
+
+  2. Build the Project
+
+  # Clean build (optional, if having issues)
+  npm run clean
+
+  # Build for Android
+  npm run build-android
+
+  3. Run in Emulator
+
+  Option A: Using Cordova CLI
+  npm run run-android
+
+  Option B: Using Android Studio
+  1. Open Android Studio
+  2. Open the project: /Users/stanislavmonarshuk/www/WarDeckAndroid/platforms/android
+  3. Wait for Gradle sync
+  4. Click the green play button ▶️
+  5. Select/create an emulator
+
+  Option C: Manual Install
+  # Start emulator first (from Android Studio)
+  # Then install APK:
+  /Users/stanislavmonarshuk/Library/Android/sdk/platform-tools/adb install
+  /Users/stanislavmonarshuk/www/WarDeckAndroid/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+
+  # Launch the app:
+  /Users/stanislavmonarshuk/Library/Android/sdk/platform-tools/adb shell am start -n com.wardeck.game/.MainActivity
+
+  4. Quick Commands Summary
+
+  # Full rebuild and run
+  npm run clean && npm run build-android && npm run run-android
+
+  # Just build
+  npm run build-android
+
+  # Just run (uses last build)
+  npm run run-android
+
+  # The most common workflow is simply:
+  npm run build-android && npm run run-android
+
+
+   # USB Android testing:
+    Open your tablet's Settings
+        Find "About tablet" or "About device" (usually at the very bottom of the settings)
+        Find "Build number"
+        Tap "Build number" 7 times in a row - a message will appear stating that you have become a developer
+
+    Setting up USB debugging:
+        Return to the main Settings
+        Find "Developer options" - this item should now appear
+        Turn on the "Developer options" switch at the top
+        Find and turn on "USB debugging"
+        Confirm in the pop-up window
+
+    Connect your device via USB (type-c)
+    Run: cordova run android --device
