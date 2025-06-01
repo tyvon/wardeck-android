@@ -73,12 +73,5 @@
     <plugin name="cordova-plugin-media" spec="^6.1.0" />
     <plugin name="cordova-plugin-file" spec="^8.0.0" />
     
-    <!-- Android Permissions -->
-    <platform name="android">
-        <config-file parent="/*" target="AndroidManifest.xml">
-            <uses-permission android:name="android.permission.INTERNET" />
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-        </config-file>
-    </platform>
+    <!-- Android Permissions are handled automatically by plugins -->
 </widget>
