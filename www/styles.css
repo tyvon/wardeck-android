@@ -17,6 +17,7 @@ html, body {
   display: block;
   margin: 0;
   padding: 0;
+  border: 1px solid #32a63d;
 }
 
 body {
@@ -54,7 +55,6 @@ body {
   padding: 0;
   overflow: hidden;
   box-sizing: border-box;
-  /*border: 1px solid #32a63d;*/
 }
 
 /* Remove border on mobile devices */
