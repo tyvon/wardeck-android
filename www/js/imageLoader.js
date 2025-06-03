@@ -1,4 +1,4 @@
-import { createUnitTypes, missionsConfig, bonusIcons, uiBackgrounds, BONUS_TYPE } from './gameConfig.js';
+import { createUnitTypes, missionsConfig, bonusIcons, uiBackgrounds, flagImages, uiIcons } from './gameConfig.js';
 
 function loadImage(src) {
     return new Promise((resolve, reject) => {
@@ -39,9 +39,15 @@ export async function loadImages() {
 
     // Get bonus icon URLs
     const bonusIconUrls = Object.values(bonusIcons);
-    
+
     // Get UI background URLs
     const uiBackgroundUrls = Object.values(uiBackgrounds);
+
+    // Get flag image URLs
+    const flagImageUrls = Object.values(flagImages);
+
+    // Get UI icon URLs
+    const uiIconUrls = Object.values(uiIcons);
 
     // Calculate total images to load for progress tracking
     const totalImages =
@@ -49,7 +55,9 @@ export async function loadImages() {
         npcUnitTypes.length +        // NPC unit images
         missionBackgroundUrls.length + // Mission backgrounds
         bonusIconUrls.length +       // Bonus icons
-        uiBackgroundUrls.length;    // UI backgrounds
+        uiBackgroundUrls.length +    // UI backgrounds
+        flagImageUrls.length +       // Flag images
+        uiIconUrls.length;           // UI icons
 
     let loadedImages = 0;
 
@@ -122,6 +130,24 @@ export async function loadImages() {
             })
         );
 
+        // Load flag images with progress tracking
+        const flagImagesLoaded = await Promise.all(
+            flagImageUrls.map(async (url) => {
+                const img = await loadImage(url);
+                reportProgress('flag image');
+                return img;
+            })
+        );
+
+        // Load UI icon images with progress tracking
+        const uiIconsLoaded = await Promise.all(
+            uiIconUrls.map(async (url) => {
+                const img = await loadImage(url);
+                reportProgress('UI icon');
+                return img;
+            })
+        );
+
         // Create a map of mission backgrounds by mission ID
         const missionBackgroundsMap = {};
         missionsConfig.forEach((mission, index) => {
@@ -133,11 +159,23 @@ export async function loadImages() {
         Object.keys(bonusIcons).forEach((type, index) => {
             bonusIconsMap[type] = bonusIconImages[index];
         });
-        
+
         // Create a map of UI backgrounds
         const uiBackgroundsMap = {};
         Object.keys(uiBackgrounds).forEach((type, index) => {
             uiBackgroundsMap[type] = uiBackgroundImages[index];
+        });
+
+        // Create a map of flag images
+        const flagImagesMap = {};
+        Object.keys(flagImages).forEach((type, index) => {
+            flagImagesMap[type] = flagImagesLoaded[index];
+        });
+
+        // Create a map of UI icons
+        const uiIconsMap = {};
+        Object.keys(uiIcons).forEach((type, index) => {
+            uiIconsMap[type] = uiIconsLoaded[index];
         });
 
         return {
@@ -146,7 +184,9 @@ export async function loadImages() {
             npcUnitImages,
             missionBackgrounds: missionBackgroundsMap,
             bonusIcons: bonusIconsMap,
-            uiBackgrounds: uiBackgroundsMap
+            uiBackgrounds: uiBackgroundsMap,
+            flagImages: flagImagesMap,
+            uiIcons: uiIconsMap
         };
     } catch (error) {
         console.error('Error loading images:', error);

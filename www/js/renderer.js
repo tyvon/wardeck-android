@@ -78,6 +78,12 @@ let bonusIconsImages = {};
 // UI background images
 let uiBackgroundImages = {};
 
+// Flag images
+let flagImagesLoaded = {};
+
+// UI icon images
+let uiIconsLoaded = {};
+
 // Initialize UI Design System
 loadFonts();
 injectKeyframes();
@@ -172,6 +178,14 @@ export function setBonusIcons(icons) {
 
 export function setUIBackgrounds(backgrounds) {
     uiBackgroundImages = backgrounds;
+}
+
+export function setFlagImages(flags) {
+    flagImagesLoaded = flags;
+}
+
+export function setUIIcons(icons) {
+    uiIconsLoaded = icons;
 }
 
 export function clearAndRedraw() {
@@ -1509,12 +1523,13 @@ function drawPlayersInfo() {
     ctx.textAlign = 'left';
 
     // HQ icon
-    ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
-    ctx.fillText('⚑', 35, 32);
+    const flagSize = 22;
+    ctx.drawImage(flagImagesLoaded.human, 30, (32 - flagSize/2) - 1, flagSize, flagSize);
 
     // HQ value
+    ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
     ctx.fillStyle = UI.colors.primary;
-    ctx.fillText(`${playerHqPercentage}%`, 55, 32);
+    ctx.fillText(`${playerHqPercentage}%`, 52, 32);
 
     // Money icon - adjust position to accommodate the HQ text
     const moneyXHuman = 50 + ctx.measureText(`${playerHqPercentage}%`).width + 20;
@@ -1614,9 +1629,8 @@ function drawPlayersInfo() {
     ctx.fillText(`${npcHqPercentage}%`, xPos, 32);
 
     // HQ icon
-    xPos -= 20;
-    ctx.fillStyle = UI.colors.secondaryGlow;
-    ctx.fillText('⚑', xPos, 32);
+    xPos -= flagSize;
+    ctx.drawImage(flagImagesLoaded.npc, xPos, (32 - flagSize/2) - 1, flagSize, flagSize);
 
     // Draw enemy defeat count if available
     if (winCondition === 'destroy_all') {
@@ -1640,10 +1654,9 @@ function drawPlayersInfo() {
         xPos -= ctx.measureText(enemyDefeatCount.toString()).width;
         ctx.fillText(enemyDefeatCount.toString(), xPos, 32);
 
-        xPos -= 15;
-        ctx.fillStyle = UI.colors.secondaryGlow;
-        ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
-        ctx.fillText('⚔', xPos, 32);
+        const skullSize = 20;
+        xPos -= skullSize + 2;
+        ctx.drawImage(uiIconsLoaded.skull, xPos, (32 - skullSize/2) - 1, skullSize, skullSize);
     }
 
     // Draw mission timer if available
@@ -1658,10 +1671,9 @@ function drawPlayersInfo() {
         xPos -= ctx.measureText(timeRemaining).width;
         ctx.fillText(timeRemaining, xPos, 32);
 
-        xPos -= 20;
-        ctx.fillStyle = UI.colors.secondaryGlow;
-        ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
-        ctx.fillText('⏱', xPos, 32);
+        const stopwatchSize = 22;
+        xPos -= stopwatchSize;
+        ctx.drawImage(uiIconsLoaded.stopwatch, xPos, (32 - stopwatchSize/2) - 2, stopwatchSize, stopwatchSize);
     }
 
     // Money value with income
@@ -2065,15 +2077,47 @@ function drawHqProgressBar(x, y, width, height, percentage, isHuman, symbol = '�
     }
 
     // Add more subtle HQ symbol
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.font = `bold ${UI.sizes.displaySmall} ${UI.fonts.heading}`;
+    // Add HQ symbol or image
+    if (isHqDisplayed && flagImagesLoaded.neutral) {
+        // Use white flag image for HQ progress bars
+        const flagIconSize = 30;
+        const flagX = x + width / 2 - flagIconSize / 2;
+        const flagY = y + 15;
+        ctx.drawImage(flagImagesLoaded.neutral, flagX, flagY, flagIconSize, flagIconSize);
+    } else if (symbol === '⏱' && uiIconsLoaded.stopwatch) {
+        // Use stopwatch image for time-based progress bars
+        const iconSize = 30;
+        const iconX = x + width / 2 - iconSize / 2;
+        const iconY = y + 15;
 
-    // If there is a flashing effect and this is HQ, change symbol style
-    if (isDamageFlashing && isHqDisplayed && Math.floor((now - damageTime) / 100) % 2 === 0) {
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        // Save context for opacity
+        ctx.save();
+        ctx.globalAlpha = 0.8;
+        ctx.drawImage(uiIconsLoaded.stopwatch, iconX, iconY, iconSize, iconSize);
+        ctx.restore();
+    } else if (symbol === '⚔' && uiIconsLoaded.skull) {
+        // Use skull image for enemy count progress bars
+        const iconSize = 30;
+        const iconX = x + width / 2 - iconSize / 2;
+        const iconY = y + 15;
+
+        // Save context for opacity
+        ctx.save();
+        ctx.globalAlpha = 0.8;
+        ctx.drawImage(uiIconsLoaded.skull, iconX, iconY, iconSize, iconSize);
+        ctx.restore();
+    } else {
+        // Fallback to text symbol
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.font = `bold ${UI.sizes.displaySmall} ${UI.fonts.heading}`;
+
+        // If there is a flashing effect and this is HQ, change symbol style
+        if (isDamageFlashing && isHqDisplayed && Math.floor((now - damageTime) / 100) % 2 === 0) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        }
+
+        ctx.fillText(symbol, x + width / 2, y + 30);
     }
-
-    ctx.fillText(symbol, x + width / 2, y + 30);
 }
 
 // Draw defensive units selection popup for bonus tiles
