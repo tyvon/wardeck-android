@@ -699,19 +699,6 @@ function showInGameMenu() {
     buttonsContainer.appendChild(mainMenuButton);
 
     menuContainer.appendChild(buttonsContainer);
-
-    // Add decorative element at the bottom of the menu
-    const bottomDecor = document.createElement('div');
-    bottomDecor.style.cssText = `
-        margin-top: 10px;
-        font-family: ${UI.fonts.monospace};
-        font-size: 12px;
-        color: rgba(50, 166, 61, 0.7);
-        text-align: center;
-        letter-spacing: 1px;
-    `;
-    bottomDecor.innerHTML = '// GAME PAUSED //';
-    menuContainer.appendChild(bottomDecor);
 }
 
 function showDifficultyMenu() {

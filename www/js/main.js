@@ -1,7 +1,7 @@
 import { initResponsiveMode } from './responsive.js';
 import { resourcePreloader } from './resourcePreloader.js';
 import { initGame } from './gameState.js';
-import { draw, setMissionBackgrounds, setBonusIcons, setUIBackgrounds } from './renderer.js';
+import { draw, setMissionBackgrounds, setBonusIcons, setUIBackgrounds, setFlagImages } from './renderer.js';
 import { setupEventListeners } from './eventHandlers.js';
 import { setupKeyboardHandlers } from './keyboardHandlers.js';
 import { createModalWindow, showModalWindow } from './modalWindow.js';
@@ -16,7 +16,7 @@ async function initializeGame() {
     try {
         // Wait for Cordova device ready if in Cordova environment
         await waitForDeviceReady();
-        
+
         // Initialize responsive mode
         initResponsiveMode();
 
@@ -40,6 +40,7 @@ async function initializeGame() {
         setMissionBackgrounds(resources.images.missionBackgrounds);
         setBonusIcons(resources.images.bonusIcons);
         setUIBackgrounds(resources.images.uiBackgrounds);
+        setFlagImages(resources.images.flagImages);
 
         // Setup event handlers
         setupEventListeners();

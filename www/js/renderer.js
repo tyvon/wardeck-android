@@ -78,6 +78,9 @@ let bonusIconsImages = {};
 // UI background images
 let uiBackgroundImages = {};
 
+// Flag images
+let flagImagesLoaded = {};
+
 // Initialize UI Design System
 loadFonts();
 injectKeyframes();
@@ -172,6 +175,10 @@ export function setBonusIcons(icons) {
 
 export function setUIBackgrounds(backgrounds) {
     uiBackgroundImages = backgrounds;
+}
+
+export function setFlagImages(flags) {
+    flagImagesLoaded = flags;
 }
 
 export function clearAndRedraw() {
@@ -1509,12 +1516,13 @@ function drawPlayersInfo() {
     ctx.textAlign = 'left';
 
     // HQ icon
-    ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
-    ctx.fillText('⚑', 35, 32);
+    const flagSize = 22;
+    ctx.drawImage(flagImagesLoaded.human, 30, 32 - flagSize/2 - 1, flagSize, flagSize);
 
     // HQ value
+    ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
     ctx.fillStyle = UI.colors.primary;
-    ctx.fillText(`${playerHqPercentage}%`, 55, 32);
+    ctx.fillText(`${playerHqPercentage}%`, 52, 32);
 
     // Money icon - adjust position to accommodate the HQ text
     const moneyXHuman = 50 + ctx.measureText(`${playerHqPercentage}%`).width + 20;
@@ -1614,9 +1622,8 @@ function drawPlayersInfo() {
     ctx.fillText(`${npcHqPercentage}%`, xPos, 32);
 
     // HQ icon
-    xPos -= 20;
-    ctx.fillStyle = UI.colors.secondaryGlow;
-    ctx.fillText('⚑', xPos, 32);
+    xPos -= flagSize;
+    ctx.drawImage(flagImagesLoaded.npc, xPos, 32 - flagSize/2 - 1, flagSize, flagSize);
 
     // Draw enemy defeat count if available
     if (winCondition === 'destroy_all') {
@@ -2065,15 +2072,25 @@ function drawHqProgressBar(x, y, width, height, percentage, isHuman, symbol = '�
     }
 
     // Add more subtle HQ symbol
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.font = `bold ${UI.sizes.displaySmall} ${UI.fonts.heading}`;
+    // Add HQ symbol or image
+    if (isHqDisplayed && flagImagesLoaded.neutral) {
+        // Use white flag image for HQ progress bars
+        const flagIconSize = 30;
+        const flagX = x + width / 2 - flagIconSize / 2;
+        const flagY = y + 15;
+        ctx.drawImage(flagImagesLoaded.neutral, flagX, flagY, flagIconSize, flagIconSize);
+    } else {
+        // Fallback to text symbol
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        ctx.font = `bold ${UI.sizes.displaySmall} ${UI.fonts.heading}`;
 
-    // If there is a flashing effect and this is HQ, change symbol style
-    if (isDamageFlashing && isHqDisplayed && Math.floor((now - damageTime) / 100) % 2 === 0) {
-        ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        // If there is a flashing effect and this is HQ, change symbol style
+        if (isDamageFlashing && isHqDisplayed && Math.floor((now - damageTime) / 100) % 2 === 0) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+        }
+
+        ctx.fillText(symbol, x + width / 2, y + 30);
     }
-
-    ctx.fillText(symbol, x + width / 2, y + 30);
 }
 
 // Draw defensive units selection popup for bonus tiles

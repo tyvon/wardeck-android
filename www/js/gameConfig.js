@@ -66,6 +66,13 @@ export const uiBackgrounds = {
     resultWindow: `${gameImages}/ui/modal-window-bg.jpg`, // Result window
 };
 
+// Flag images for HQ indicators
+export const flagImages = {
+    human: `${gameImages}/ui/flag/green.png`,  // Green flag for human HQ
+    npc: `${gameImages}/ui/flag/red.png`,      // Red flag for NPC HQ
+    neutral: `${gameImages}/ui/flag/white.png`  // White flag for HQ progress bars
+};
+
 export const hqImageWidth = 100;
 export const hqImageHeight = 500;
 export const hqImageTopOffset = 60;
