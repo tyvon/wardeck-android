@@ -1654,10 +1654,9 @@ function drawPlayersInfo() {
         xPos -= ctx.measureText(enemyDefeatCount.toString()).width;
         ctx.fillText(enemyDefeatCount.toString(), xPos, 32);
 
-        xPos -= 15;
-        ctx.fillStyle = UI.colors.secondaryGlow;
-        ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
-        ctx.fillText('⚔', xPos, 32);
+        const skullSize = 20;
+        xPos -= skullSize + 2;
+        ctx.drawImage(uiIconsLoaded.skull, xPos, (32 - skullSize/2) - 1, skullSize, skullSize);
     }
 
     // Draw mission timer if available
@@ -2095,6 +2094,17 @@ function drawHqProgressBar(x, y, width, height, percentage, isHuman, symbol = '�
         ctx.save();
         ctx.globalAlpha = 0.8;
         ctx.drawImage(uiIconsLoaded.stopwatch, iconX, iconY, iconSize, iconSize);
+        ctx.restore();
+    } else if (symbol === '⚔' && uiIconsLoaded.skull) {
+        // Use skull image for enemy count progress bars
+        const iconSize = 30;
+        const iconX = x + width / 2 - iconSize / 2;
+        const iconY = y + 15;
+
+        // Save context for opacity
+        ctx.save();
+        ctx.globalAlpha = 0.8;
+        ctx.drawImage(uiIconsLoaded.skull, iconX, iconY, iconSize, iconSize);
         ctx.restore();
     } else {
         // Fallback to text symbol

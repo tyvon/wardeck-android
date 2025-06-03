@@ -74,7 +74,8 @@ export const flagImages = {
 };
 
 export const uiIcons = {
-    stopwatch: `${gameImages}/ui/stopwatch.png`  // Stopwatch icon for timers
+    stopwatch: `${gameImages}/ui/stopwatch.png`,  // Stopwatch icon for timers
+    skull: `${gameImages}/ui/skull.png`           // Skull icon for enemy count
 };
 
 export const hqImageWidth = 100;
