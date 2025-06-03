@@ -1056,7 +1056,7 @@ function drawUnitTypes(startX, startY, player) {
 
                 if (unit.experienceLevel === 1) {
                     // One star for level 1
-                    ctx.fillText('★', badgeX + badgeSize/2, badgeY + badgeSize/2 + 1);
+                    ctx.fillText('★', badgeX + badgeSize/2, badgeY + badgeSize/2);
                 } else if (unit.experienceLevel === 2) {
                     // Two stars for level 2
                     ctx.fillText('★★', badgeX + badgeSize/2, badgeY + badgeSize/2 + 1);
@@ -1514,7 +1514,7 @@ function drawPlayersInfo() {
 
     // HQ value
     ctx.fillStyle = UI.colors.primary;
-    ctx.fillText(`${playerHqPercentage}%`, 50, 32);
+    ctx.fillText(`${playerHqPercentage}%`, 55, 32);
 
     // Money icon - adjust position to accommodate the HQ text
     const moneyXHuman = 50 + ctx.measureText(`${playerHqPercentage}%`).width + 20;
@@ -1569,7 +1569,7 @@ function drawPlayersInfo() {
 
             // Draw money icon image
             const iconSize = 20;
-            ctx.drawImage(bonusIconsImages[BONUS_TYPE.MONEY], nextX, 32 - iconSize/2, iconSize, iconSize);
+            ctx.drawImage(bonusIconsImages[BONUS_TYPE.MONEY], nextX, (32 - iconSize/2) - 1, iconSize, iconSize);
 
             // Money bonus value
             ctx.fillStyle = UI.colors.gold;
@@ -1582,7 +1582,7 @@ function drawPlayersInfo() {
 
             // Draw armor icon image
             const iconSize = 20;
-            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ARMOR], nextX, 32 - iconSize/2, iconSize, iconSize);
+            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ARMOR], nextX, (32 - iconSize/2) - 1, iconSize, iconSize);
 
             // nextX += 15;
 
@@ -1597,7 +1597,7 @@ function drawPlayersInfo() {
 
             // Draw attack icon image
             const iconSize = 16;
-            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ATTACK], nextX, 32 - iconSize/2, iconSize, iconSize);
+            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ATTACK], nextX, (32 - iconSize/2) - 1, iconSize, iconSize);
 
             // Attack bonus value
             ctx.fillStyle = 'rgba(220, 60, 60, 0.8)';
@@ -1614,7 +1614,7 @@ function drawPlayersInfo() {
     ctx.fillText(`${npcHqPercentage}%`, xPos, 32);
 
     // HQ icon
-    xPos -= 15;
+    xPos -= 20;
     ctx.fillStyle = UI.colors.secondaryGlow;
     ctx.fillText('⚑', xPos, 32);
 
@@ -1728,7 +1728,7 @@ function drawPlayersInfo() {
 
             // Draw money icon image
             const iconSize = 20;
-            ctx.drawImage(bonusIconsImages[BONUS_TYPE.MONEY], xPos - iconSize, 32 - iconSize/2, iconSize, iconSize);
+            ctx.drawImage(bonusIconsImages[BONUS_TYPE.MONEY], xPos - iconSize, (32 - iconSize/2) - 1, iconSize, iconSize);
         }
 
         if (aggregatedBonuses[BONUS_TYPE.ARMOR] > 0) {
@@ -1744,7 +1744,7 @@ function drawPlayersInfo() {
 
             // Draw armor icon image
             const iconSize = 20;
-            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ARMOR], xPos - iconSize, 32 - iconSize/2, iconSize, iconSize);
+            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ARMOR], xPos - iconSize, (32 - iconSize/2) - 1, iconSize, iconSize);
         }
 
         if (aggregatedBonuses[BONUS_TYPE.ATTACK] > 0) {
@@ -1760,7 +1760,7 @@ function drawPlayersInfo() {
 
             // Draw attack icon image
             const iconSize = 16;
-            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ATTACK], xPos - iconSize, 32 - iconSize/2, iconSize, iconSize);
+            ctx.drawImage(bonusIconsImages[BONUS_TYPE.ATTACK], xPos - iconSize, (32 - iconSize/2) - 1, iconSize, iconSize);
         }
     }
 }
