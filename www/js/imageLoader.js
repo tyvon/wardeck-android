@@ -1,4 +1,4 @@
-import { createUnitTypes, missionsConfig, bonusIcons, uiBackgrounds, flagImages } from './gameConfig.js';
+import { createUnitTypes, missionsConfig, bonusIcons, uiBackgrounds, flagImages, uiIcons } from './gameConfig.js';
 
 function loadImage(src) {
     return new Promise((resolve, reject) => {
@@ -46,6 +46,9 @@ export async function loadImages() {
     // Get flag image URLs
     const flagImageUrls = Object.values(flagImages);
 
+    // Get UI icon URLs
+    const uiIconUrls = Object.values(uiIcons);
+
     // Calculate total images to load for progress tracking
     const totalImages =
         humanUnitTypes.length * 2 + // Human unit images + info images
@@ -53,7 +56,8 @@ export async function loadImages() {
         missionBackgroundUrls.length + // Mission backgrounds
         bonusIconUrls.length +       // Bonus icons
         uiBackgroundUrls.length +    // UI backgrounds
-        flagImageUrls.length;        // Flag images
+        flagImageUrls.length +       // Flag images
+        uiIconUrls.length;           // UI icons
 
     let loadedImages = 0;
 
@@ -135,6 +139,15 @@ export async function loadImages() {
             })
         );
 
+        // Load UI icon images with progress tracking
+        const uiIconsLoaded = await Promise.all(
+            uiIconUrls.map(async (url) => {
+                const img = await loadImage(url);
+                reportProgress('UI icon');
+                return img;
+            })
+        );
+
         // Create a map of mission backgrounds by mission ID
         const missionBackgroundsMap = {};
         missionsConfig.forEach((mission, index) => {
@@ -159,6 +172,12 @@ export async function loadImages() {
             flagImagesMap[type] = flagImagesLoaded[index];
         });
 
+        // Create a map of UI icons
+        const uiIconsMap = {};
+        Object.keys(uiIcons).forEach((type, index) => {
+            uiIconsMap[type] = uiIconsLoaded[index];
+        });
+
         return {
             humanUnitImages,
             humanUnitInfoImages,
@@ -166,7 +185,8 @@ export async function loadImages() {
             missionBackgrounds: missionBackgroundsMap,
             bonusIcons: bonusIconsMap,
             uiBackgrounds: uiBackgroundsMap,
-            flagImages: flagImagesMap
+            flagImages: flagImagesMap,
+            uiIcons: uiIconsMap
         };
     } catch (error) {
         console.error('Error loading images:', error);

@@ -73,6 +73,10 @@ export const flagImages = {
     neutral: `${gameImages}/ui/flag/white.png`  // White flag for HQ progress bars
 };
 
+export const uiIcons = {
+    stopwatch: `${gameImages}/ui/stopwatch.png`  // Stopwatch icon for timers
+};
+
 export const hqImageWidth = 100;
 export const hqImageHeight = 500;
 export const hqImageTopOffset = 60;

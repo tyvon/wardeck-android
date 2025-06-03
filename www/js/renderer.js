@@ -81,6 +81,9 @@ let uiBackgroundImages = {};
 // Flag images
 let flagImagesLoaded = {};
 
+// UI icon images
+let uiIconsLoaded = {};
+
 // Initialize UI Design System
 loadFonts();
 injectKeyframes();
@@ -179,6 +182,10 @@ export function setUIBackgrounds(backgrounds) {
 
 export function setFlagImages(flags) {
     flagImagesLoaded = flags;
+}
+
+export function setUIIcons(icons) {
+    uiIconsLoaded = icons;
 }
 
 export function clearAndRedraw() {
@@ -1517,7 +1524,7 @@ function drawPlayersInfo() {
 
     // HQ icon
     const flagSize = 22;
-    ctx.drawImage(flagImagesLoaded.human, 30, 32 - flagSize/2 - 1, flagSize, flagSize);
+    ctx.drawImage(flagImagesLoaded.human, 30, (32 - flagSize/2) - 1, flagSize, flagSize);
 
     // HQ value
     ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
@@ -1623,7 +1630,7 @@ function drawPlayersInfo() {
 
     // HQ icon
     xPos -= flagSize;
-    ctx.drawImage(flagImagesLoaded.npc, xPos, 32 - flagSize/2 - 1, flagSize, flagSize);
+    ctx.drawImage(flagImagesLoaded.npc, xPos, (32 - flagSize/2) - 1, flagSize, flagSize);
 
     // Draw enemy defeat count if available
     if (winCondition === 'destroy_all') {
@@ -1665,10 +1672,9 @@ function drawPlayersInfo() {
         xPos -= ctx.measureText(timeRemaining).width;
         ctx.fillText(timeRemaining, xPos, 32);
 
-        xPos -= 20;
-        ctx.fillStyle = UI.colors.secondaryGlow;
-        ctx.font = `bold ${UI.sizes.headingSmall} ${UI.fonts.primary}`;
-        ctx.fillText('⏱', xPos, 32);
+        const stopwatchSize = 22;
+        xPos -= stopwatchSize;
+        ctx.drawImage(uiIconsLoaded.stopwatch, xPos, (32 - stopwatchSize/2) - 2, stopwatchSize, stopwatchSize);
     }
 
     // Money value with income
@@ -2079,6 +2085,17 @@ function drawHqProgressBar(x, y, width, height, percentage, isHuman, symbol = '�
         const flagX = x + width / 2 - flagIconSize / 2;
         const flagY = y + 15;
         ctx.drawImage(flagImagesLoaded.neutral, flagX, flagY, flagIconSize, flagIconSize);
+    } else if (symbol === '⏱' && uiIconsLoaded.stopwatch) {
+        // Use stopwatch image for time-based progress bars
+        const iconSize = 30;
+        const iconX = x + width / 2 - iconSize / 2;
+        const iconY = y + 15;
+
+        // Save context for opacity
+        ctx.save();
+        ctx.globalAlpha = 0.8;
+        ctx.drawImage(uiIconsLoaded.stopwatch, iconX, iconY, iconSize, iconSize);
+        ctx.restore();
     } else {
         // Fallback to text symbol
         ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
