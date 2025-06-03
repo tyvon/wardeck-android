@@ -21,7 +21,7 @@
     <!-- Preferences -->
     <preference name="DisallowOverscroll" value="true" />
     <preference name="Orientation" value="landscape" />
-    <preference name="BackgroundColor" value="0xff1a1a1a" />
+    <preference name="BackgroundColor" value="0xff1e262c" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="SplashMaintainAspectRatio" value="true" />
@@ -35,7 +35,7 @@
     <preference name="android-minSdkVersion" value="22" />
     <preference name="android-targetSdkVersion" value="33" />
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/images/logo.png" />
-    <preference name="AndroidWindowSplashScreenBackground" value="#1a1a1a" />
+    <preference name="AndroidWindowSplashScreenBackground" value="#1e262c" />
     
     <!-- iOS specific preferences -->
     <preference name="target-device" value="universal" />

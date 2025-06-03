@@ -111,7 +111,8 @@ function resizeCanvas() {
         container.style.margin = '0';
         container.style.padding = '0';
         container.style.overflow = 'hidden';
-        container.style.backgroundColor = '#000'; // Black background for letterboxing
+        // Don't set background color - let the body background show through
+        container.style.backgroundColor = 'transparent';
 
     } else {
         // Desktop behavior remains the same
