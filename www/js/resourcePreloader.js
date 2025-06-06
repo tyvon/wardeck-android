@@ -49,7 +49,14 @@ export class ResourcePreloader {
             });
         });
 
-        // Progress is already sent to listeners
+        // Dispatch a custom event for splash screen communication
+        window.dispatchEvent(new CustomEvent('resource-load-progress', {
+            detail: {
+                percent: clampedPercent,
+                message: message,
+                isComplete: clampedPercent >= 100
+            }
+        }));
     }
 
     /**
