@@ -15,8 +15,6 @@
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
     <allow-navigation href="*" />
-    <preference name="WKWebViewOnly" value="true" />
-    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
 
     <!-- Preferences -->
     <preference name="DisallowOverscroll" value="true" />
@@ -37,9 +35,6 @@
     <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/images/logo.png" />
     <preference name="AndroidWindowSplashScreenBackground" value="#1e262c" />
 
-    <!-- iOS specific preferences -->
-    <preference name="target-device" value="universal" />
-    <preference name="deployment-target" value="12.0" />
 
     <!-- Allow navigation -->
     <allow-navigation href="*" />
@@ -57,10 +52,6 @@
         <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/images/logo.png" />
     </platform>
 
-    <platform name="ios">
-        <icon src="www/images/icon.png" />
-        <preference name="SplashScreen" value="www/images/logo.png" />
-    </platform>
 
     <!-- Required plugins -->
     <plugin name="cordova-plugin-device" spec="^2.1.0" />
