@@ -10,6 +10,7 @@ node_modules/
 *.aab
 
 www/dist
+res
 
 # IDE files
 .idea/
@@ -39,3 +40,6 @@ tmp/
 
 # Cordova hooks (if auto-generated)
 hooks/README.md
+
+*.pem
+*.keystore

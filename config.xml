@@ -46,7 +46,12 @@
     <!-- Platform specific settings -->
     <platform name="android">
         <preference name="android-build-tool" value="gradle" />
+        
+        <!-- Default icon -->
         <icon src="www/images/icon.png" />
+        
+        <!-- Round adaptive icon configuration -->
+        <resource-file src="res/icon/android/icon.png" target="app/src/main/res/mipmap/ic_launcher_round.png" />
 
         <!-- Android 12+ splash screen using preference tag -->
         <preference name="AndroidWindowSplashScreenAnimatedIcon" value="www/images/logo.png" />
