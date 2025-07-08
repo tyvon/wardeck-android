@@ -1,0 +1,29 @@
+For Signed APK (Release):
+
+  # Using your existing keystore and build.json
+  cordova build android --release --buildConfig=build.json -- --packageType=apk
+
+  Output: app/build/outputs/apk/release/app-release.apk
+
+  For Unsigned APK (Debug/Testing):
+
+  # Debug APK (unsigned, for testing only)
+  cordova build android
+
+  Output: app/build/outputs/apk/debug/app-debug.apk
+
+  Alternative commands:
+
+  # Clean and rebuild
+  cordova clean android
+  cordova build android --release --buildConfig=build.json -- --packageType=apk
+
+  # For AAB (Google Play Store)
+  cordova build android --release --buildConfig=build.json -- --packageType=bundle
+
+  Your keystore info:
+
+  - Keystore: wardeck-release-key.keystore
+  - Config: build.json
+  - Password: WarDeck2025!
+  - Alias: wardeck

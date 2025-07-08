@@ -26,31 +26,26 @@
   4. Click the green play button ▶️
   5. Select/create an emulator
 
-  Option C: Manual Install
-  # Start emulator first (from Android Studio)
-  # Then install APK:
-  /Users/stanislavmonarshuk/Library/Android/sdk/platform-tools/adb install
-  /Users/stanislavmonarshuk/www/WarDeckAndroid/platforms/android/app/build/outputs/apk/debug/app-debug.apk
 
-  # Launch the app:
-  /Users/stanislavmonarshuk/Library/Android/sdk/platform-tools/adb shell am start -n com.wardeck.game/.MainActivity
+  # Start the web server:
+    # Option 1: Using Python (serves from www directory)
+    cd ~/www/WarDeckCordova/www && python3 -m http.server 8080
+    # Access at: http://localhost:8080
 
-  4. Quick Commands Summary
+    # Option 2: Using Cordova serve (shows project info page)
+    cd ~/www/WarDeckCordova && npm run serve
+    # Access at: http://localhost:8000/www/
 
-  # Full rebuild and run
-  npm run clean && npm run build-android && npm run run-android
+    Stop the web server:
 
-  # Just build
-  npm run build-android
+    # If using Python server:
+    pkill -f "python3 -m http.server"
 
-  # Just run (uses last build)
-  npm run run-android
-
-  # The most common workflow is simply:
-  npm run build-android && npm run run-android
+    # If using Cordova serve:
+    pkill -f "cordova serve"
 
 
-   # USB Android testing:
+ # USB Android testing:
     Open your tablet's Settings
         Find "About tablet" or "About device" (usually at the very bottom of the settings)
         Find "Build number"
@@ -67,4 +62,11 @@
     Run: cordova run android --device
 
 
+# Dist for Google Play Store
 /Users/stanislavmonarshuk/www/WarDeckAndroid/platforms/android/app/build/outputs/bundle/release/app-release.aab
+
+# Dist for itch.io
+/Users/stanislavmonarshuk/www/WarDeckAndroid/app/build/outputs/apk/release/app-release.apk
+
+https://tyvon.github.io/wardeck-privacy/privacy-policy.html
+

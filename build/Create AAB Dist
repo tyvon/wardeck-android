@@ -1,0 +1,62 @@
+Build AAB (Android App Bundle) for Google Play:
+
+  # Build signed AAB using your keystore
+  cordova build android --release --buildConfig=build.json -- --packageType=bundle
+
+  Output: platforms/android/app/build/outputs/bundle/release/app-release.aab
+
+  Full Process from Clean:
+
+  # 1. Clean previous builds (optional)
+  cordova clean android
+
+  # 2. Build signed AAB
+  cordova build android --release --buildConfig=build.json -- --packageType=bundle
+
+  # 3. Verify the output
+  ls -la platforms/android/app/build/outputs/bundle/release/
+
+  Your Configuration:
+
+  - Keystore: wardeck-release-key.keystore
+  - Build Config: build.json
+  - Password: WarDeck2025!
+  - Package ID: com.wardeck.game
+
+  Google Play Requirements:
+
+  - ✅ AAB format (not APK) - Required since 2021
+  - ✅ Signed with your keystore
+  - ✅ Target SDK 33 (you have this)
+  - ✅ 64-bit support (included)
+Build AAB (Android App Bundle) for Google Play:
+
+  # Build signed AAB using your keystore
+  cordova build android --release --buildConfig=build.json -- --packageType=bundle
+
+  Output: platforms/android/app/build/outputs/bundle/release/app-release.aab
+
+  Full Process from Clean:
+
+  # 1. Clean previous builds (optional)
+  cordova clean android
+
+  # 2. Build signed AAB
+  cordova build android --release --buildConfig=build.json -- --packageType=bundle
+
+  # 3. Verify the output
+  ls -la platforms/android/app/build/outputs/bundle/release/
+
+  Your Configuration:
+
+  - Keystore: wardeck-release-key.keystore
+  - Build Config: build.json
+  - Password: WarDeck2025!
+  - Package ID: com.wardeck.game
+
+  Google Play Requirements:
+
+  - ✅ AAB format (not APK) - Required since 2021
+  - ✅ Signed with your keystore
+  - ✅ Target SDK 33 (you have this)
+  - ✅ 64-bit support (included)
