@@ -11,7 +11,8 @@ node_modules/
 
 www/dist
 res
-build
+build/
+build.json
 
 # IDE files
 .idea/
